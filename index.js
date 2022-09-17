@@ -18,4 +18,9 @@ client.events = new Collection();
 client.commands = new Collection();
 loadEvents(client);
 
+const { connect } = require("mongoose");
+connect(client.config.DatabaseURL, {}).then(() =>
+  console.log("Sucessfully conected to the database.")
+);
+
 client.login(client.config.token);
