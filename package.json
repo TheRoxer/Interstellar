@@ -11,8 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "ascii-table": "^0.0.9",
+    "chalk": "^4.1.2",
     "discord.js": "^14.3.0",
+    "erela.js": "^2.3.3",
+    "erela.js-apple": "^1.2.6",
+    "erela.js-deezer": "^1.0.7",
+    "genius-lyrics": "^4.4.0",
     "glob": "^8.0.3",
-    "mongoose": "^6.6.1"
+    "lavasfy": "^2.3.0",
+    "mongoose": "^6.6.1",
+    "pretty-ms": "^7.0.1"
   }
 }
