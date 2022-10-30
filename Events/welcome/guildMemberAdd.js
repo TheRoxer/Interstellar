@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const joinSchema = require("../../Schemas/joinSchema");
+const { footer, botColor } = require("../../config.json");
 
 module.exports = {
   name: "guildMemberAdd",
@@ -25,7 +26,7 @@ module.exports = {
             embeds: [
               new EmbedBuilder()
                 .setDescription(`**${user.username}** joined **${guild.name}**`)
-                .setColor("Blurple")
+                .setColor(botColor)
                 .setFooter({
                   text: `${guild.name} now has ${guild.memberCount} members`,
                   iconURL: guild.iconURL(),

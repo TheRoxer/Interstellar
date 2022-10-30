@@ -266,10 +266,9 @@ module.exports = {
                     value: `${new Date().toLocaleString()}`,
                   }
                 )
-                .setFooter({
-                  text: `${client.user.tag} by www.lunarcodes.org`,
-                  iconURL: client.user.displayAvatarURL(),
-                }),
+                .setFooter({ 
+                  text: footer.replace(`{user}`, interaction.user.tag), 
+                  iconURL: interaction.user.displayAvatarURL() }),
             ],
             components: [
               new ActionRowBuilder().setComponents(

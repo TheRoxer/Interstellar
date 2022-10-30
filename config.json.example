@@ -1,0 +1,7 @@
+{
+	"token": "your token here",
+    "clientID": "your id here",
+    "databaseURL": "your mongo database url here",
+    "botColor": "set your bot color here (ex. 0x5112e4)",
+    "footer": "Invoked by {user} • set your footer here",
+}

@@ -6,15 +6,16 @@ const {
     UserFlags,
     version
 } = require("discord.js");
+const { footer, botColor } = require("../../config.json");
 
-  const { connection } = require("mongoose");
-  const os             = require("os");
+const { connection } = require("mongoose");
+const os             = require("os");
 
-  const status = [
-    "Disconnected",
-    "Connected",
-    "Connecting",
-    "Disconnecting"
+const status = [
+  "Disconnected",
+  "Connected",
+  "Connecting",
+  "Disconnecting"
 ];
   
   module.exports = {
@@ -32,10 +33,12 @@ const {
 
         const embed = new EmbedBuilder()
 
-            .setColor(0x5112e4)
-            .setTitle(`🤖 ${client.user.username} Status`)
+            .setColor(botColor)
+            .setAuthor({ name: `${client.user.username} Status`, iconURL: client.user.displayAvatarURL() })
             .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
             .setDescription(client.application.description || null)
+            .setFooter({ text: footer.replace(`{user}`, interaction.user.tag), iconURL: interaction.user.displayAvatarURL() })
+            .setTimestamp()
             .addFields(
                 { name: "👩🏻‍🔧 Client", value: client.user.tag, inline: true },
                 { name: "📆 Created", value: `<t:${parseInt(client.user.createdTimestamp / 1000)}:R>`, inline: true },
@@ -56,7 +59,9 @@ const {
                 { name: "🎤 Voice Channels", value: `${getChannelTypeSize([ChannelType.GuildVoice, ChannelType.GuildStageVoice])}`, inline: true },
                 { name: "🧵 Threads", value: `${getChannelTypeSize([ChannelType.GuildPublicThread, ChannelType.GuildPrivateThread, ChannelType.GuildNewsThread])}`, inline: true }
             )
-            .setFooter({ text: "Interstellar" });
+            .setFooter({ 
+              text: footer.replace(`{user}`, interaction.user.tag), 
+              iconURL: interaction.user.displayAvatarURL() });
             
         interaction.reply({ embeds: [embed] });
     },

@@ -6,10 +6,10 @@ module.exports = {
   name: "ready",
   once: true,
   execute(client) {
-    console.log("Client is ready");
+    console.log(chalk.blue("✅ >> Client is ready!"));
 
-    connect(client.config.DatabaseURL, {}).then(() =>
-      console.log(chalk.yellow(`✅ >> Successfully connected to Database.`))
+    connect(client.config.databaseURL, {}).then(() =>
+      console.log(chalk.red(`✅ >> Successfully connected to Database.`))
     );
 
     loadCommands(client);

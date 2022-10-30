@@ -7,6 +7,7 @@ const {
   } = require("discord.js");
   const leaveSchema = require("../../Schemas/leaveSchema");
   const joinSchema = require("../../Schemas/joinSchema");
+  const { footer, botColor } = require("../../config.json");
 
   module.exports = {
     data: new SlashCommandBuilder()
@@ -67,7 +68,7 @@ const {
                 await leaveChannel.save().catch((err) => console.log(err));
                 const successEmbed = new EmbedBuilder()
                   .setDescription(`Enabled leave message in **${channel.name}**!`)
-                  .setColor("Blurple");
+                  .setColor(botColor);
                 await interaction.reply({
                   embeds: [successEmbed],
                   ephemeral: true,
@@ -80,7 +81,7 @@ const {
                 );
                 const successEmbed = new EmbedBuilder()
                   .setDescription(`Updated leave messages to **${channel.name}**!`)
-                  .setColor("Blurple");
+                  .setColor(botColor);
   
                 await interaction.reply({
                   embeds: [successEmbed],
@@ -107,7 +108,7 @@ const {
                 await joinChannel.save().catch((err) => console.log(err));
                 const successEmbed = new EmbedBuilder()
                   .setDescription(`Enabled welcome message in **${channel.name}**!`)
-                  .setColor("Blurple");
+                  .setColor(botColor);
                 await interaction.reply({
                   embeds: [successEmbed],
                   ephemeral: true,
@@ -120,7 +121,7 @@ const {
                 );
                 const successEmbed = new EmbedBuilder()
                   .setDescription(`Updated welcome messages to **${channel.name}**!`)
-                  .setColor("Blurple");
+                  .setColor(botColor);
   
                 await interaction.reply({
                   embeds: [successEmbed],
@@ -142,7 +143,7 @@ const {
   
               const successEmbed = new EmbedBuilder()
                 .setDescription(`Successfully deleted the data in this guild.`)
-                .setColor("Blurple");
+                .setColor(botColor);
               await interaction.reply({
                 embeds: [successEmbed],
                 ephemeral: true,

@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const leaveSchema = require("../../Schemas/leaveSchema");
+const { footer, botColor } = require("../../config.json");
 
 module.exports = {
   name: "guildMemberRemove",
@@ -24,7 +25,7 @@ module.exports = {
           .send({
             embeds: [
               new EmbedBuilder()
-                .setColor("Blurple")
+                .setColor(botColor)
                 .setDescription(`**${user.username}** left **${guild.name}**`)
                 .setFooter({
                   text: `${guild.name} now has ${guild.memberCount} members`,

@@ -140,16 +140,13 @@ module.exports = {
         });
 
       const sampleMessage =
-        'Welcome to tickets! Click the "Create Ticket" button to create a ticket and the support team will be right with you!';
+        'Click the "Create Ticket" button to create a ticket, the support team will be right with you!';
 
       client.channels.cache.get(channel.id).send({
         embeds: [
           new EmbedBuilder()
             .setTitle("Ticket System")
             .setDescription(description == null ? sampleMessage : description)
-            .setImage(
-              "https://cdn.discordapp.com/attachments/1015320163169611870/1016335587344654346/UTS.png"
-            ),
         ],
         components: [
           new ActionRowBuilder().setComponents(
