@@ -133,7 +133,7 @@ module.exports = {
                   console.log(err);
                 });
             })
-            .catch(async (err) => {
+            .catch( (err) => {
               console.log(err);
             });
           break;

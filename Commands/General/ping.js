@@ -6,7 +6,7 @@ module.exports = {
         .setName("ping")
         .setDescription("Responds with pong"),
 
-    async execute(interaction) {
+    execute(interaction) {
         const embed = new EmbedBuilder()
 
             .setTitle(`🏓 Pong!`)
