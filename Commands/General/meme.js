@@ -15,7 +15,7 @@ module.exports = {
                 )
         ),
 
-    async execute(interaction) {
+    execute(interaction) {
         const { guild, options, member } = interaction;
 
         const platform = options.getString("platform");

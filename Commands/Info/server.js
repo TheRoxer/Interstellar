@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("Displays server info"),
 
     
-    async execute(interaction) {
+    execute(interaction) {
 
         const { guild } = interaction;
         const { members } = guild;

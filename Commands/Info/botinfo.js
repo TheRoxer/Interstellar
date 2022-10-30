@@ -26,7 +26,7 @@ const status = [
      *
      * @param {ChatInputCommandInteraction} interaction
      */
-     async execute(interaction) {
+     execute(interaction) {
 
         const getChannelTypeSize = type => client.channels.cache.filter(channel => type.includes(channel.type)).size;
         const client = interaction.client;

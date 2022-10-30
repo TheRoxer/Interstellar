@@ -13,10 +13,10 @@ module.exports = {
    * @param {Client} client
    * @param {ChatInputCommandInteraction} interaction
    */
-  async execute(interaction, client) {
+  execute(interaction, client) {
     const { user, guild } = interaction;
 
-    leaveSchema.findOne({ guildId: guild.id }, async (err, data) => {
+    leaveSchema.findOne({ guildId: guild.id }, (err, data) => {
       if (!data) {
         return;
       } else {
