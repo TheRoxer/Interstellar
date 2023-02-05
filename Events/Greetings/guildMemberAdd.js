@@ -3,11 +3,11 @@ const {
   ChatInputCommandInteraction,
   EmbedBuilder,
 } = require("discord.js");
-const leaveSchema = require("../../Schemas/leaveSchema");
+const joinSchema = require("../../Schemas/joinSchema");
 const { footer, botColor } = require("../../config.json");
 
 module.exports = {
-  name: "guildMemberRemove",
+  name: "guildMemberAdd",
 
   /**
    * @param {Client} client
@@ -16,7 +16,7 @@ module.exports = {
   execute(interaction, client) {
     const { user, guild } = interaction;
 
-    leaveSchema.findOne({ guildId: guild.id }, (err, data) => {
+    joinSchema.findOne({ guildId: guild.id }, (err, data) => {
       if (!data) {
         return;
       } else {
@@ -25,8 +25,8 @@ module.exports = {
           .send({
             embeds: [
               new EmbedBuilder()
+                .setDescription("```" + `${user.username}` + "```" + ` joined **${guild.name}**`)
                 .setColor(botColor)
-                .setDescription(`**${user.username}** left **${guild.name}**`)
                 .setFooter({
                   text: `${guild.name} now has ${guild.memberCount} members`,
                   iconURL: guild.iconURL(),

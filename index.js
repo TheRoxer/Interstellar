@@ -1,20 +1,17 @@
-const {
-  Client,
-  GatewayIntentBits,
-  Partials,
-  Collection,
-} = require("discord.js");
-const { Guilds, GuildMembers, GuildMessages } = GatewayIntentBits;
+const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
+const { Guilds, GuildMembers, GuildMessages, GuildVoiceStates } = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 const { loadEvents } = require("./Handlers/eventHandler");
 const chalk = require("chalk");
 
 const client = new Client({
-  intents: [Guilds, GuildMembers, GuildMessages],
+  intents: [Guilds, GuildMembers, GuildMessages, GuildVoiceStates],
   partials: [User, Message, GuildMember, ThreadMember],
 });
 
-client.config = require("./config.json");
+require("dotenv").config();
+const token = process.env.CLIENT_TOKEN;
+
 client.events = new Collection();
 client.commands = new Collection();
 loadEvents(client);
@@ -44,4 +41,4 @@ process.on("uncaughtException", (err, origin) => {
   console.log(err, origin);
 });
 
-client.login(client.config.token);
+client.login(token);

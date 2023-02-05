@@ -19,7 +19,7 @@ module.exports = {
         const embed = new EmbedBuilder()
 
             .setColor(botColor)
-            .setTitle(`Informacje serwera ${guild.name}`)
+            .setTitle(`${guild.name}'s Info`)
             .setThumbnail(guild.iconURL({ size: 1024 }))
             .setImage(guild.bannerURL({ size: 1024 }))
             .addFields(

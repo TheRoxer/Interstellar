@@ -85,7 +85,7 @@ module.exports = {
               channel.setRateLimitPerUser(2);
 
               ticketEmbed
-                .setTitle(`Welcome to ${interaction.channel.name}!`)
+                .setTitle(`Welcome!`)
                 .setDescription(
                   `Welcome <@${userId}> to your ticket. Please wait for the support team to respond to your ticket, in the meantime please explain your situation!`
                 );

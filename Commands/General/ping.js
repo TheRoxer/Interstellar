@@ -20,5 +20,5 @@ module.exports = {
             .setTimestamp();
 
         interaction.reply({ embeds: [embed] });
-    },
+    }, 
 };

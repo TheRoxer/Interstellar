@@ -1,5 +1,5 @@
 const { Client, SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
-const { footer, botColor } = require("../../config.json");
+const { footer, botColor, logChannel } = require("../../config.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -34,7 +34,7 @@ module.exports = {
             .setDescription("Something went wrong. Please try again later.")
             .setColor(botColor);
 
-        const succesEmbed = new EmbedBuilder()
+        const succesEmbed = new EmbedBuilder() 
             .setAuthor({ name: "Moderation | Action: Mute" })
             .setDescription(`Succesfully muted ` + "`" + `${user.tag}.` + "`")
             .addFields(
@@ -47,25 +47,33 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL() })
             .setTimestamp();
 
-        if (
-            member.roles.highest.position >=
-            interaction.member.roles.highest.position
-        )
+        if ( member.roles.highest.position >= interaction.member.roles.highest.position ) {
+            interaction.member.guild.channels.cache.get(logChannel).send({
+                embeds: [errEmbed],
+            });
             return interaction.reply({ embeds: [errEmbed], ephemeral: true });
+        }
 
-        if (
-            !interaction.guild.members.me.permissions.has(
-                PermissionFlagsBits.ModerateMembers
-            )
-        )
+        if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ModerateMembers)) {
+            interaction.member.guild.channels.cache.get(logChannel).send({
+                embeds: [errEmbed],
+            });
             return interaction.reply({ embeds: [errEmbed], ephemeral: true });
+        }
 
-        if (!time * 60 * 1000 )
+        if (!time * 60 * 1000 ) {
+            interaction.member.guild.channels.cache.get(logChannel).send({
+                embeds: [errEmbed],
+            });
             return interaction.reply({ embeds: [errEmbed], ephemeral: true });
+        }
 
         try { 
             await member.timeout(time * 60 * 1000, reason);
 
+            interaction.member.guild.channels.cache.get(logChannel).send({
+                embeds: [succesEmbed],
+            });
             interaction.reply({ embeds: [succesEmbed] });
         } catch (err) {
             console.log(err);

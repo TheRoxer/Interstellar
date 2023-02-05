@@ -23,7 +23,7 @@ module.exports = {
 
         const succesEmbed = new EmbedBuilder()
             .setAuthor({ name: "Moderation | Action: Unmute" })
-            .setDescription(`Succesfully unmuted` + "`" + `${user.tag}.` + "`")
+            .setDescription(`Succesfully unmuted ` + "`" + `${user.tag}` + "`.")
             .setColor(botColor)
             .setFooter({ 
                 text: footer.replace(`{user}`, interaction.user.tag), 
