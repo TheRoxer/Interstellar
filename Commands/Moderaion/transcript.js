@@ -35,7 +35,6 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL() })
             .setTimestamp();
 
-
         if (amount == 0) {
 
             const transcript = await Transcript.createTranscript(channel || interaction.channel);

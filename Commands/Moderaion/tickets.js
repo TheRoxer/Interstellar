@@ -110,23 +110,23 @@ module.exports = {
               .setDescription("Successfully setup ticket system!")
               .addFields(
                 {
-                  name: "<:channelemoji:1015242699277873192> Channel",
-                  value: `<:reply:1015235235195146301>  <#${channel.id}>`,
+                  name: "<:channel:1072276171363991643> Channel",
+                  value: `╰ <#${channel.id}>`,
                   inline: true,
                 },
                 {
-                  name: "<:6974orangenwand:1015234855379943454> Support Role",
-                  value: `<:reply:1015235235195146301>  <@&${supportRole.id}>`,
+                  name: "<:Staff:1002717466637631611> Support Role",
+                  value: `╰  <@&${supportRole.id}>`,
                   inline: true,
                 },
                 {
                   name: "<:Discussions:1015242700993351711> Panel Description",
-                  value: `<:reply:1015235235195146301>  ${description}`,
+                  value: `╰  ${description}`,
                   inline: true,
                 },
                 {
                   name: "Ticket Logs",
-                  value: `<#${ticketLogs}>`,
+                  value: `${ticketLogs}`,
                 }
               ),
           ],

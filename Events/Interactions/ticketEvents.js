@@ -1,13 +1,7 @@
-const {
-  Client,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-  ChannelType,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-} = require("discord.js");
+const { Client, ChatInputCommandInteraction, EmbedBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const { Types } = require("mongoose");
+const { footer, botColor } = require("../../config.json");
+
 
 const ticketSchema = require("../../schemas/ticketSchema");
 const userSchema = require("../../schemas/userSchema");
@@ -48,7 +42,7 @@ module.exports = {
             "UseApplicationCommands",
           ];
 
-          const ticketEmbed = new EmbedBuilder().setColor("Blurple");
+          const ticketEmbed = new EmbedBuilder().setColor(botColor);
 
           interaction.guild.channels
             .create({
@@ -180,7 +174,7 @@ module.exports = {
           await interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setColor("Blue")
+                .setColor(botColor)
                 .setDescription(`Ticket has been claimed`),
             ],
             ephemeral: true,
@@ -212,7 +206,7 @@ module.exports = {
               embeds: [
                 new EmbedBuilder()
                   .setDescription("The ticket is already closed.")
-                  .setColor("0x2F3136"),
+                  .setColor("botColor"),
               ],
             });
 
@@ -247,7 +241,7 @@ module.exports = {
           await interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setColor("Blue")
+                .setColor(botColor)
                 .setTitle("Ticket Closed")
                 .setDescription(
                   "The ticket has been closed, the user who created this ticket cannot see it now!"
@@ -298,7 +292,7 @@ module.exports = {
               embeds: [
                 new EmbedBuilder()
                   .setDescription("The ticket is not closed.")
-                  .setColor("0x2F3136"),
+                  .setColor(botColor),
               ],
             });
 
@@ -342,7 +336,7 @@ module.exports = {
                 new EmbedBuilder()
                   .setTitle("Reopened ticket!")
                   .setDescription(`Reopened by ${member.user.tag}`)
-                  .setColor("Blue"),
+                  .setColor(botColor),
               ],
               ephemeral: true,
             })
@@ -418,7 +412,7 @@ module.exports = {
                       value: `${new Date().toLocaleString()}`,
                     }
                   )
-                  .setColor("Blue"),
+                  .setColor(botColor),
               ],
               files: [transcript],
             })
@@ -434,7 +428,7 @@ module.exports = {
                     name: "Time",
                     value: "Ticket will be Deleted in 5 seconds...",
                   })
-                  .setColor("Blue"),
+                  .setColor(botColor),
               ],
             })
             .catch((err) => console.log(err));
