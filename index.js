@@ -12,6 +12,7 @@ const chalk = require("chalk");
 //server (counts) stats preset with one command
 //poll database interaction 
 //setup command to set up: stats, tickets, greetings, etc
+//change ticketEvent moderation role checking 
 
 const client = new Client({
   intents: [Guilds, GuildMembers, GuildMessages, GuildVoiceStates],

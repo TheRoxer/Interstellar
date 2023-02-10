@@ -1,5 +1,7 @@
 const { EmbedBuilder, Message, WebhookClient } = require('discord.js');
-const { botColor, footer, logChannel } = require('../../config.json');
+const { botColor, footer } = require('../../config.json');
+const logSchema = require('../../schemas/logSchema.js');
+
 
 module.exports = {
     name: 'messageUpdate',
@@ -8,7 +10,10 @@ module.exports = {
      * @param {Message} oldMessage 
      * @param {Message} newMessage 
      */
-    execute(oldMessage, newMessage) {
+    async execute(oldMessage, newMessage) {
+
+        const logData = await logSchema.findOne({ guildId: newMessage.guild.id });
+        const logChannel = logData.logsId;
     
         if (oldMessage.author.bot) return;
         if (oldMessage.content === newMessage.content) return;
@@ -37,8 +42,9 @@ module.exports = {
             .setFooter({ text: footer.replace(`{user}`, interaction.user.tag), iconURL: interaction.user.displayAvatarURL() })
             .setTimestamp();
             
-        new WebhookClient({ url: "https://discord.com/api/webhooks/1039579921250533416/GmeQT4fxbHvaC-kTsY_9El6htJBpSQCaIZDXwyCUzx0Z2OF49--vfHkFe0PvO2Yl97ws" }
-        ).send({ embeds: [embed] }).catch((err) => console.log(err));
+            interaction.member.guild.channels.cache.get(logChannel).send({
+                embeds: [embed],
+            });
         
 
     }

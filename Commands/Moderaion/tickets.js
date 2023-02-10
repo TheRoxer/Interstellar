@@ -1,13 +1,4 @@
-const {
-  SlashCommandBuilder,
-  ChatInputCommandInteraction,
-  Client,
-  EmbedBuilder,
-  ChannelType,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-} = require("discord.js");
+const { SlashCommandBuilder, ChatInputCommandInteraction, Client, EmbedBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const { Types } = require("mongoose");
 
 const ticketSchema = require("../../schemas/ticketSchema");

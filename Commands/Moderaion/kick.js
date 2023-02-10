@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const { botColor, footer, logChannel } = require("../../config.json");
+const logSchema = require("../../schemas/logSchema.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,7 +18,10 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const { channel, options } = interaction;
+        const { options } = interaction;
+
+        const logData = await logSchema.findOne({ guildId: interaction.guild.id });
+        const logChannel = logData.logsId;
 
         const user = options.getUser("target");
         const reason = options.getString("reason") || "No reason provided";

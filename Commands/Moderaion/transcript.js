@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
-const { footer, botColor, logChannel } = require("../../config.json");
+const { footer, botColor } = require("../../config.json");
 const Transcript = require("discord-html-transcripts");
+const logSchema = require("../../schemas/logSchema.js");
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -21,6 +23,9 @@ module.exports = {
         ),
 
     async execute(interaction) {
+
+        const logData = await logSchema.findOne({ guildId: interaction.guild.id });
+        const logChannel = logData.logsId;
 
         const amount = interaction.options.getNumber("amount");
         const channel = interaction.options.getChannel("channel");

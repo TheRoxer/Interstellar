@@ -35,7 +35,7 @@ module.exports = {
 
         const button = new ButtonBuilder()
             .setCustomId('regenerate')
-            .setLabel('Regenerate response')
+            .setLabel('Regenerate response (in dev)')
             .setStyle(ButtonStyle.Primary)
             .setEmoji('🔁');
         

@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
-const { footer, botColor, logChannel } = require("../../config.json");
+const { footer, botColor } = require("../../config.json");
+const logSchema = require("../../schemas/logSchema.js");
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,7 +19,9 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const { channel, options } = interaction;
+        const { options } = interaction;
+        const logData = await logSchema.findOne({ guildId: interaction.guild.id });
+        const logChannel = logData.logsId;
 
         const user = options.getUser("target");
         const reason = options.getString("reason") || "No reason provided.";
@@ -42,7 +46,10 @@ module.exports = {
                 },
             )
             .setColor(botColor)
-            .setFooter({ text: footer.replace(`{user}`, interaction.user.tag), iconURL: interaction.user.displayAvatarURL() })
+            .setFooter({ 
+                text: footer.replace(`{user}`, interaction.user.tag), 
+                iconURL: interaction.user.displayAvatarURL() 
+            })
 
             .setTimestamp();
 
