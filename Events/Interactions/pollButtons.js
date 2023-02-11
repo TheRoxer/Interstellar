@@ -1,5 +1,6 @@
 const { ButtonInteraction } = require("discord.js");
-const votedMembers = new Set();
+const { Types } = require("mongoose");
+const pollSchema = require("../../schemas/pollSchema");
 
 module.exports = {
     name: "interactionCreate",
@@ -14,10 +15,21 @@ module.exports = {
         const splitArray = interaction.customId.split("-");
         if(splitArray[0] !== "Poll") return;
 
-        if(votedMembers.has(`${interaction.user.id}-${interaction.message.id}`)) 
+        const data = await pollSchema.findOne({
+            userId: interaction.user.id,
+            messageId: interaction.message.id
+        });
+
+        if(data) 
         return interaction.reply({content: "You have already voted!", ephemeral: true});
 
-        votedMembers.add(`${interaction.user.id}-${interaction.message.id}`);
+        const newSchema = new pollSchema({
+            _id: Types.ObjectId(),
+            userId: interaction.user.id,
+            messageId: interaction.message.id
+        });
+
+        newSchema.save().catch((err) => console.log(err));
 
         const embed = interaction.message.embeds[0];
         if(!embed) return interaction.reply({content: "Unable to find the poll.", ephemeral: true});

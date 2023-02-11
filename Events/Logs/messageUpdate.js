@@ -1,4 +1,4 @@
-const { EmbedBuilder, Message, WebhookClient } = require('discord.js');
+const { EmbedBuilder, Message } = require('discord.js');
 const { botColor, footer } = require('../../config.json');
 const logSchema = require('../../schemas/logSchema.js');
 
