@@ -2,3 +2,8 @@
 .gitattributes
 .vscode/settings.json
 .env
+notes.txt
+Commands/Public/reputation.js
+schemas/userReputationSchema.js
+Events/Logs/messageUpdate.js
+Events/Logs/messageUpdate.js

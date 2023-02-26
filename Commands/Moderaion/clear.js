@@ -8,7 +8,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("clear")
         .setDescription("Clears the chat")
-        .setDefaultMemberPermissions(PermissionFlagsBits.MANAGE_MESSAGES)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .setDMPermission(false)
 
         .addNumberOption(options => options
@@ -39,6 +39,22 @@ module.exports = {
         const reason = interaction.options.getString("reason");
         const target = interaction.options.getUser("target");
 
+        if(amount > 100) return interaction.reply({ 
+            embeds: [
+                new EmbedBuilder()
+                .setDescription("You can only delete 100 messages at a time")
+                .setColor(botColor)
+            ], ephemeral: true
+        });
+        
+        if(amount < 1) return interaction.reply({ 
+            embeds: [
+                new EmbedBuilder()
+                .setDescription("You must delete at least 1 message")
+                .setColor(botColor)
+            ], ephemeral: true
+        });
+
         const channelMessages = await interaction.channel.messages.fetch();
 
         const responseEmbed = new EmbedBuilder()
@@ -48,7 +64,7 @@ module.exports = {
         
         const logEmbed = new EmbedBuilder() 
             .setAuthor({ name: "Moderation | Action: Clear" })
-            .setDescription(`Succesfully cleared ${amount} messages.`)
+            .setDescription(`Succesfully cleared ${channelMessages.size} messages.`)
             .addFields(
                 { name: "Channel:", value: `${interaction.channel}`, inline: true },
                 { name: "Reason", value: `${reason}`, inline: true },

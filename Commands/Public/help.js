@@ -13,6 +13,7 @@ module.exports = {
                 .setDescription("Provide a command name")
                 .setAutocomplete(true)
         ),
+        
     async autocomplete(interaction) {
         const data = Array.from(interaction.client.commands.values());
         const focusedValue = interaction.options.getFocused();
@@ -29,6 +30,7 @@ module.exports = {
         const providedCommand = interaction.options.getString("name");
         const commandList = Array.from(interaction.client.commands.values());
         const commandMap = commandList.map((value) => value.data.name);
+
         if (providedCommand == null) {
             const embed = new EmbedBuilder()
 
@@ -36,22 +38,32 @@ module.exports = {
                     name: interaction.guild.name,
                     iconURL: interaction.guild.iconURL(),
                 })
+                .setTitle("Bot Commands")
                 .setColor(botColor)
 
+                .setDescription(commandList.map((value) => {
+                    return `\`${value.data.name}\``;
+                }).join(", "))
+
+                
                 .addFields(
-                    commandList.map((value) => {
-                        return {
-                            name: `/` + value.data.name,
-                            value: value.data.description,
-                        };
-                    })
-                )  
+                    {
+                        name: "Need help?",
+                        value: "Use `/help <command>` to get more info about a command",
+                    },
+                    {
+                        name: "Command Count",
+                        value: String(commandList.length),
+                    },
+                ) 
+
 
                 .setTimestamp()
                 .setFooter({ 
                     text: footer.replace(`{user}`, interaction.user.tag), 
                     iconURL: interaction.user.displayAvatarURL() 
                 })
+
             await interaction.reply({ embeds: [embed] });
         }
 
@@ -95,3 +107,13 @@ module.exports = {
         }
     },
 };
+
+
+                // .addFields(
+                //     commandList.map((value) => {
+                //         return {
+                //             name: `/` + value.data.name,
+                //             value: value.data.description,
+                //         };
+                //     })
+                // )  

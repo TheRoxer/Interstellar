@@ -4,7 +4,7 @@ const { footer, botColor } = require("../../config.json");
 
 
 const ticketSchema = require("../../schemas/ticketSchema");
-const userSchema = require("../../schemas/userSchema");
+const userSchema = require("../../schemas/userTicketSchema");
 
 const { createTranscript } = require("discord-html-transcripts");
 
@@ -151,12 +151,12 @@ module.exports = {
               ephemeral: true,
             });
 
-          if (!member.roles.cache.find((r) => r.id === ticketDat.supportId))
+          if (userDat.creatorId === member.id)
             return await interaction.reply({
               embeds: [
                 new EmbedBuilder()
                   .setColor("Red")
-                  .setDescription(`Your not allowed to use this button.`),
+                  .setDescription(`You can't claim your own ticket.`),
               ],
               ephemeral: true,
             });
@@ -190,16 +190,16 @@ module.exports = {
             ticketId: channel.id,
           });
 
-          if (!member.roles.cache.find((r) => r.id === ticketsData.supportId)) {
-            return await interaction.reply({
-              embeds: [
-                new EmbedBuilder()
-                  .setColor("Red")
-                  .setDescription(`You're not allowed to use this button.`),
-              ],
-              ephemeral: true,
-            });
-          }
+          // if (!member.roles.cache.find((r) => r.id === ticketsData.supportId)) {
+          //   return await interaction.reply({
+          //     embeds: [
+          //       new EmbedBuilder()
+          //         .setColor("Red")
+          //         .setDescription(`You're not allowed to use this button.`),
+          //     ],
+          //     ephemeral: true,
+          //   });
+          // }
 
           if (usersData.closed === true)
             return await interaction.reply({
@@ -351,16 +351,16 @@ module.exports = {
             ticketId: channel.id,
           });
 
-          if (!member.roles.cache.find((r) => r.id === tksData.supportId)) {
-            return await interaction.reply({
-              embeds: [
-                new EmbedBuilder()
-                  .setColor("Red")
-                  .setDescription(`Your not allowed to use this button.`),
-              ],
-              ephemeral: true,
-            });
-          }
+          // if (!member.roles.cache.find((r) => r.id === tksData.supportId)) {
+          //   return await interaction.reply({
+          //     embeds: [
+          //       new EmbedBuilder()
+          //         .setColor("Red")
+          //         .setDescription(`Your not allowed to use this button.`),
+          //     ],
+          //     ephemeral: true,
+          //   });
+          // }
 
           interaction.message.edit({
             components: [

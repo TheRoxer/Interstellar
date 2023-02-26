@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, ChatInputCommandInteraction, Client, EmbedBuilder, ChannelType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const { Types } = require("mongoose");
+const { botColor, footer } = require("../../config.json");
 
 const ticketSchema = require("../../schemas/ticketSchema");
 
@@ -99,6 +100,11 @@ module.exports = {
             new EmbedBuilder()
               .setTitle("Ticket System")
               .setDescription("Successfully setup ticket system!")
+              .setColor(botColor)
+              .setFooter({ 
+                text: footer.replace(`{user}`, interaction.user.tag), 
+                iconURL: interaction.user.displayAvatarURL() 
+              })
               .addFields(
                 {
                   name: "<:channel:1072276171363991643> Channel",
@@ -120,6 +126,7 @@ module.exports = {
                   value: `${ticketLogs}`,
                 }
               ),
+            
           ],
           ephemeral: true,
         })

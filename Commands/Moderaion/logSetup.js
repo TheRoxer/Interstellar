@@ -33,8 +33,6 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === "setup") {
 
-            
-
             const logChannel = interaction.options.getChannel("log-channel");
 
             const data = await logSchema.findOne({
@@ -43,28 +41,26 @@ module.exports = {
 
             if (data) {
 
-            const logChannelDb = await logSchema.findOne({ guildId: interaction.guild.id }).logsId;
+                interaction.reply({
+                    embeds: [
+                    new EmbedBuilder()
+                        .setTitle("You have already setup the log system")
+                        .addFields(
+                            {
+                                name: "<:channel:1072276171363991643> Channel",
+                                value: `╰ <#${data.logsId}>`,
+                                inline: true,
+                            })
 
-            interaction.reply({
-                embeds: [
-                new EmbedBuilder()
-                    .setTitle("You have already setup the log system")
-                    .addFields(
-                        {
-                            name: "<:channel:1072276171363991643> Channel",
-                            value: `╰ <#${data.logsId}>`,
-                            inline: true,
+
+                        .setColor(botColor)
+                        .setFooter({ 
+                            text: footer.replace(`{user}`, interaction.user.tag), 
+                            iconURL: interaction.user.displayAvatarURL() 
                         })
-
-
-                    .setColor(botColor)
-                    .setFooter({ 
-                        text: footer.replace(`{user}`, interaction.user.tag), 
-                        iconURL: interaction.user.displayAvatarURL() 
-                    })
-                    .setTimestamp()
-                ]});
-            return;
+                        .setTimestamp()
+                    ]});
+                return;
             }
     
             const newSchema = new logSchema({

@@ -27,6 +27,10 @@
             if (user.id === clientID) {
                 return interaction.reply({ content: "You can't dm me!", ephemeral: true })
             }
+            if(!interaction.user.id == 499634115566370830) {
+                return interaction.reply({ content: "You can't use this command!", ephemeral: true })
+            }
+
 
             const messageEmbed = new EmbedBuilder()
     
@@ -38,7 +42,7 @@
                     iconURL: interaction.user.displayAvatarURL() })
                 .setTimestamp();
 
-            user.send(messageEmbed).catch(async (err) => {
+            user.send(`${message}`).catch(async (err) => {
                 console.log(err)
 
                 return await interaction.reply({ 
@@ -48,12 +52,12 @@
             })
 
             const responseEmbed = new EmbedBuilder()
-                .setTitle(`Sent to ${user.user.tag}`)
+                .setTitle(`Direct Message Sent!`)
                 .setColor(botColor)
                 .addFields(
                     {
-                        name: "__Message:__",
-                        value: "```" + `${message}` + "```",
+                        name: "Message:",
+                        value: "`" + `${message}` + "`",
                     }
 
                 )

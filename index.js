@@ -4,16 +4,6 @@ const { User, Message, GuildMember, ThreadMember } = Partials;
 const { loadEvents } = require("./Handlers/eventHandler");
 const chalk = require("chalk");
 
-//TODO
-
-//emoji library
-//server presets
-//poll
-//server (counts) stats preset with one command
-//poll database interaction 
-//setup command to set up: stats, tickets, greetings, etc
-//change ticketEvent moderation role checking 
-
 const client = new Client({
   intents: [Guilds, GuildMembers, GuildMessages, GuildVoiceStates],
   partials: [User, Message, GuildMember, ThreadMember],
