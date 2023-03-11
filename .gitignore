@@ -7,3 +7,6 @@ Commands/Public/reputation.js
 schemas/userReputationSchema.js
 Events/Logs/messageUpdate.js
 Events/Logs/messageUpdate.js
+Commands\Moderaion\welcome-leave.js
+Events\Guilds\guildMemberAdd.js
+Events\Guilds\guildMemberRemove.js
